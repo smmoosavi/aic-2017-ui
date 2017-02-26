@@ -1,0 +1,34 @@
+.floor {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-image: url(images/0/floor.png);
+}
+
+.board {
+    position: relative;
+}
+
+.bug {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background: #000;
+    border-radius: 40px;
+}
+
+.to-up {
+    transform: rotate(0deg);
+}
+
+.to-right {
+    transform: rotate(90deg);
+}
+
+.to-down {
+    transform: rotate(180deg);
+}
+
+.to-left {
+    transform: rotate(270deg);
+}
