@@ -59,11 +59,13 @@ class Trash extends Component {
 
 class Net extends Component {
     render() {
-        const {data}= this.props;
+        const {data, w, h, dx, dy}= this.props;
         const {x, y} = data.toJS();
+        const _x = (w + x + dx) % w;
+        const _y = (h + y + dy) % h;
         const style = {
-            left: 64 * y,
-            top: 64 * x,
+            left: 64 * _y,
+            top: 64 * _x,
 
         };
         return <div className="net" style={style}></div>;
@@ -121,7 +123,17 @@ class Board extends Component {
         const nets = data.get('nets');
         nets.forEach((net) => {
             const id = net.get('id');
-            children.push(<Net data={net} key={`Fo-${id}`}/>);
+            children.push(<Net w={w} h={h} dx={1} dy={1} data={net} key={`Fo-${id}-1`}/>);
+            children.push(<Net w={w} h={h} dx={1} dy={0} data={net} key={`Fo-${id}-2`}/>);
+            children.push(<Net w={w} h={h} dx={1} dy={-1} data={net} key={`Fo-${id}-3`}/>);
+
+            children.push(<Net w={w} h={h} dx={0} dy={1} data={net} key={`Fo-${id}-4`}/>);
+            children.push(<Net w={w} h={h} dx={0} dy={0} data={net} key={`Fo-${id}-5`}/>);
+            children.push(<Net w={w} h={h} dx={0} dy={-1} data={net} key={`Fo-${id}-6`}/>);
+
+            children.push(<Net w={w} h={h} dx={-1} dy={1} data={net} key={`Fo-${id}-7`}/>);
+            children.push(<Net w={w} h={h} dx={-1} dy={0} data={net} key={`Fo-${id}-8`}/>);
+            children.push(<Net w={w} h={h} dx={-1} dy={-1} data={net} key={`Fo-${id}-9`}/>);
         });
 
         const style = {
