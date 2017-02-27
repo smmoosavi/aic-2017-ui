@@ -13,8 +13,99 @@
     position: absolute;
     width: 64px;
     height: 64px;
-    background: #000;
-    border-radius: 40px;
+}
+
+.bug.healthy.up.solder.team1 {
+    background-image: url(images/0/0.png);
+}
+
+.bug.healthy.up.solder.team2 {
+    background-image: url(images/0/1.png);
+}
+
+.bug.healthy.up.queen.team1 {
+    background-image: url(images/0/2.png);
+}
+
+.bug.healthy.up.queen.team2 {
+    background-image: url(images/0/3.png);
+}
+
+.bug.healthy.down.solder.team1 {
+    background-image: url(images/0/4.png);
+}
+
+.bug.healthy.down.solder.team2 {
+    background-image: url(images/0/5.png);
+}
+
+.bug.healthy.down.queen.team1 {
+    background-image: url(images/0/6.png);
+}
+
+.bug.healthy.down.queen.team2 {
+    background-image: url(images/0/7.png);
+}
+
+.bug.sick.up.solder.team1 {
+    background-image: url(images/0/8.png);
+}
+
+.bug.sick.up.solder.team2 {
+    background-image: url(images/0/9.png);
+}
+
+.bug.sick.up.queen.team1 {
+    background-image: url(images/0/10.png);
+}
+
+.bug.sick.up.queen.team2 {
+    background-image: url(images/0/11.png);
+}
+
+.bug.sick.down.solder.team1 {
+    background-image: url(images/0/12.png);
+}
+
+.bug.sick.down.solder.team2 {
+    background-image: url(images/0/13.png);
+}
+
+.bug.sick.down.queen.team1 {
+    background-image: url(images/0/14.png);
+}
+
+.bug.sick.down.queen.team2 {
+    background-image: url(images/0/15.png);
+}
+
+.food {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-image: url(images/0/food0.png);
+}
+
+.trash {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-image: url(images/0/trash0.png);
+}
+
+.net {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-image: url(images/0/slipper.png);
+    opacity: 0.4;
+}
+
+.teleport {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-image: url(images/0/teleport_in.png);
 }
 
 .to-up {
