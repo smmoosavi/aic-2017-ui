@@ -95,9 +95,10 @@ class Board extends Component {
         }
         const bees = data.get('bees');
 
-        bees.forEach((bee) => {
-            const id = bee.get('id');
-            children.push(<Bug data={bee} key={`Be-${id}`}/>);
+        const teleports = data.get('teleports');
+        teleports.forEach((teleport) => {
+            const id = teleport.get('id');
+            children.push(<Teleport data={teleport} key={`Fo-${id}`}/>);
         });
 
         const foods = data.get('foods');
@@ -112,16 +113,15 @@ class Board extends Component {
             children.push(<Trash data={trash} key={`Tr-${id}`}/>);
         });
 
+        bees.forEach((bee) => {
+            const id = bee.get('id');
+            children.push(<Bug data={bee} key={`Be-${id}`}/>);
+        });
+
         const nets = data.get('nets');
         nets.forEach((net) => {
             const id = net.get('id');
             children.push(<Net data={net} key={`Fo-${id}`}/>);
-        });
-
-        const teleports = data.get('teleports');
-        teleports.forEach((teleport) => {
-            const id = teleport.get('id');
-            children.push(<Teleport data={teleport} key={`Fo-${id}`}/>);
         });
 
         const style = {
