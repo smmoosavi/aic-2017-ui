@@ -18,7 +18,6 @@ class Bug extends Component {
     render() {
         const {data}= this.props;
         const {x, y, direction, color, queen, sick, team} = data.toJS();
-        console.log(data + '');
         const style = {
             left: 64 * x,
             top: 64 * y,
@@ -157,13 +156,14 @@ const convertTurn = ([turn, scores, diffs]) => {
 };
 
 const getResetData = (init) => {
-    const [, , , bees, foods, trashes, nets, teleports] = init.args;
+    const [, w, h, bees, foods, trashes, nets, teleports] = init.args;
     const beeMap = Immutable.Map(bees.map(convertBee).map(bee => [bee.get('id'), bee]));
     const foodMap = Immutable.Map(foods.map(convertFood).map(food => [food.get('id'), food]));
     const trashMap = Immutable.Map(trashes.map(convertTrash).map(trash => [trash.get('id'), trash]));
     const netMap = Immutable.Map(nets.map(convertNet).map(net => [net.get('id'), net]));
     const teleportMap = Immutable.Map(teleports.map(convertTeleport).map(teleport => [teleport.get('id'), teleport]));
     return Immutable.Map({
+        size: [w, h],
         turn: 0,
         scores: [0, 0],
         bees: beeMap,
@@ -228,18 +228,85 @@ export default class Player extends Component {
         }
     };
 
+
+    applyAdds = (map, diff) => {
+        diff.args.forEach((arg) => this.applyAdd(map, arg));
+    };
+    applyAdd = (map, diff) => {
+        const [id, type, x, y, direction, color, queen, team] = diff;
+        if (type === 0) {
+            const sick = 0;
+            const bee = Immutable.Map({id, x, y, direction, color, queen, sick, team});
+            map.setIn(['bees', id], bee);
+        }
+        if (type === 1) {
+            const food = Immutable.Map({id, x, y});
+            map.setIn(['foods', id], food);
+        }
+        if (type === 2) {
+            const trash = Immutable.Map({id, x, y});
+            map.setIn(['trashes', id], trash);
+        }
+        if (type === 3) {
+            const net = Immutable.Map({id, x, y});
+            map.setIn(['nets', id], net);
+        }
+    };
+    applyMoves = (map, diff) => {
+        diff.args.forEach((arg) => this.applyMove(map, arg));
+    };
+    applyMove = (map, diff) => {
+        const [w, h] = map.get('size');
+        const directionX = [w - 1, 0, 1, 0];
+        const directionY = [0, 1, 0, h - 1];
+        const [id, m] = diff;
+        if (m === 0) {// turn right
+            map.updateIn(['bees', id, 'direction'], d => (d + 1) % 4);
+        }
+        if (m === 2) {// turn left
+            map.updateIn(['bees', id, 'direction'], d => (d + 3) % 4);
+        }
+        if (m === 1) {// move
+            const d = map.getIn(['bees', id, 'direction']);
+            map.updateIn(['bees', id, 'x'], x => (x + directionX[d]) % w);
+            map.updateIn(['bees', id, 'y'], y => (y + directionY[d]) % h);
+        }
+    };
+    applyChanges = (map, diff) => {
+        diff.args.forEach((arg) => this.applyChange(map, arg));
+    };
+    applyChange = (map, arg) => {
+        const [id, x, y, color, sick] = arg;
+        map.setIn(['bees', id, 'x'], x);
+        map.setIn(['bees', id, 'y'], y);
+        map.setIn(['bees', id, 'color'], color);
+        map.setIn(['bees', id, 'sick'], sick);
+    };
+
+    applyDelete = (map, diff) => {
+        diff.args.forEach((ids) => {
+            ids.forEach(id => {
+                map.deleteIn(['bees', id]);
+                map.deleteIn(['foods', id]);
+                map.deleteIn(['trashes', id]);
+                map.deleteIn(['nets', id]);
+                map.deleteIn(['teleports', id]);
+            });
+        });
+    };
+
     applyDiff = (map, diff) => {
         if (diff.type === 'a') {
-            console.log(JSON.stringify(diff))
+            this.applyAdds(map, diff);
         }
         if (diff.type === 'd') {
-            // console.log(JSON.stringify(diff))
+            this.applyDelete(map, diff);
         }
         if (diff.type === 'm') {
-            // console.log(JSON.stringify(diff))
+            this.applyMoves(map, diff);
         }
         if (diff.type === 'c') {
-            // console.log(JSON.stringify(diff))
+            this.applyChanges(map, diff);
         }
     };
 
@@ -275,9 +342,9 @@ export default class Player extends Component {
                         turn: {turn}
                     </div>
                     <div className="col">
-                        <span className="text-danger">{score1}</span>
+                        <span className="text-primary">{score1}</span>
                         {' - '}
-                        <span className="text-primary">{score2}</span>
+                        <span className="text-danger">{score2}</span>
                     </div>
                     <div className="col text-center">
                         <div className="btn-group">

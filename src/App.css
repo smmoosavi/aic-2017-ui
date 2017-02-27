@@ -13,6 +13,7 @@
     position: absolute;
     width: 64px;
     height: 64px;
+    transition: top 200ms, left 200ms, transform 200ms;
 }
 
 .bug.up.team0 {
