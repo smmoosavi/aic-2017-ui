@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Immutable from 'immutable';
+import cx from 'classnames';
 
 class Floor extends Component {
     render() {
@@ -16,16 +17,71 @@ class Floor extends Component {
 class Bug extends Component {
     render() {
         const {data}= this.props;
-        // console.log(data + '');
+        const {x, y, direction, color, queen, sick, team} = data.toJS();
+        console.log(data + '');
+        const style = {
+            left: 64 * x,
+            top: 64 * y,
+
+        };
+        const dir = ['to-left', 'to-down', 'to-right', 'to-up'][direction];
+
+        const className = cx("bug", color ? 'up' : 'down', 'team' + team, {sick, queen}, dir);
+        return <div className={className} style={style}></div>;
+    }
+}
+
+class Food extends Component {
+    render() {
+        const {data}= this.props;
         const {x, y} = data.toJS();
         const style = {
             left: 64 * x,
             top: 64 * y,
 
         };
-        return <div className="bug" style={style}>
+        return <div className="food" style={style}></div>;
+    }
+}
 
-        </div>;
+class Trash extends Component {
+    render() {
+        const {data}= this.props;
+        const {x, y} = data.toJS();
+        const style = {
+            left: 64 * x,
+            top: 64 * y,
+
+        };
+        return <div className="trash" style={style}></div>;
+    }
+}
+
+
+class Net extends Component {
+    render() {
+        const {data}= this.props;
+        const {x, y} = data.toJS();
+        const style = {
+            left: 64 * x,
+            top: 64 * y,
+
+        };
+        return <div className="net" style={style}></div>;
+    }
+}
+
+
+class Teleport extends Component {
+    render() {
+        const {data}= this.props;
+        const {x, y} = data.toJS();
+        const style = {
+            left: 64 * x,
+            top: 64 * y,
+
+        };
+        return <div className="teleport" style={style}></div>;
     }
 }
 
@@ -35,14 +91,40 @@ class Board extends Component {
         const children = [];
         for (let i = 0; i < w; i++) {
             for (let j = 0; j < h; j++) {
-                children.push(<Floor x={i} y={j} key={`F-${i}-${j}`}/>)
+                children.push(<Floor x={i} y={j} key={`Fl-${i}-${j}`}/>)
             }
         }
         const bees = data.get('bees');
+
         bees.forEach((bee) => {
             const id = bee.get('id');
-            children.push(<Bug data={bee} key={`B-${id}`}/>);
+            children.push(<Bug data={bee} key={`Be-${id}`}/>);
         });
+
+        const foods = data.get('foods');
+        foods.forEach((food) => {
+            const id = food.get('id');
+            children.push(<Food data={food} key={`Fo-${id}`}/>);
+        });
+
+        const trashes = data.get('trashes');
+        trashes.forEach((trash) => {
+            const id = trash.get('id');
+            children.push(<Trash data={trash} key={`Tr-${id}`}/>);
+        });
+
+        const nets = data.get('nets');
+        nets.forEach((net) => {
+            const id = net.get('id');
+            children.push(<Net data={net} key={`Fo-${id}`}/>);
+        });
+
+        const teleports = data.get('teleports');
+        teleports.forEach((teleport) => {
+            const id = teleport.get('id');
+            children.push(<Teleport data={teleport} key={`Fo-${id}`}/>);
+        });
+
         const style = {
             width: 64 * w,
             height: 64 * h,
