@@ -19,11 +19,11 @@ class Bug extends Component {
         const {data}= this.props;
         const {x, y, direction, color, queen, sick, team} = data.toJS();
         const style = {
-            left: 64 * x,
-            top: 64 * y,
+            left: 64 * y,
+            top: 64 * x,
 
         };
-        const dir = ['to-left', 'to-down', 'to-right', 'to-up'][direction];
+        const dir = ['to-right', 'to-up', 'to-left', 'to-down'][direction];
 
         const className = cx("bug", color ? 'up' : 'down', 'team' + team, {sick, queen}, dir);
         return <div className={className} style={style}></div>;
@@ -35,8 +35,8 @@ class Food extends Component {
         const {data}= this.props;
         const {x, y} = data.toJS();
         const style = {
-            left: 64 * x,
-            top: 64 * y,
+            left: 64 * y,
+            top: 64 * x,
 
         };
         return <div className="food" style={style}></div>;
@@ -48,8 +48,8 @@ class Trash extends Component {
         const {data}= this.props;
         const {x, y} = data.toJS();
         const style = {
-            left: 64 * x,
-            top: 64 * y,
+            left: 64 * y,
+            top: 64 * x,
 
         };
         return <div className="trash" style={style}></div>;
@@ -62,8 +62,8 @@ class Net extends Component {
         const {data}= this.props;
         const {x, y} = data.toJS();
         const style = {
-            left: 64 * x,
-            top: 64 * y,
+            left: 64 * y,
+            top: 64 * x,
 
         };
         return <div className="net" style={style}></div>;
@@ -76,8 +76,8 @@ class Teleport extends Component {
         const {data}= this.props;
         const {x, y} = data.toJS();
         const style = {
-            left: 64 * x,
-            top: 64 * y,
+            left: 64 * y,
+            top: 64 * x,
 
         };
         return <div className="teleport" style={style}></div>;
@@ -257,8 +257,8 @@ export default class Player extends Component {
     };
     applyMove = (map, diff) => {
         const [w, h] = map.get('size');
-        const directionX = [w - 1, 0, 1, 0];
-        const directionY = [0, 1, 0, h - 1];
+        const directionY = [1, 0, w - 1, 0];
+        const directionX = [0, h - 1, 0, 1];
         const [id, m] = diff;
         if (m === 0) {// turn right
             map.updateIn(['bees', id, 'direction'], d => (d + 1) % 4);
@@ -350,6 +350,7 @@ export default class Player extends Component {
                         <div className="btn-group">
                             <button className="btn btn-secondary" onClick={this.reset}>&laquo;</button>
                             <button className="btn btn-secondary" onClick={this.togglePlay}>&rsaquo;</button>
+                            <button className="btn btn-secondary" onClick={this.turn}>&rsaquo;</button>
                         </div>
                     </div>
                 </div>
