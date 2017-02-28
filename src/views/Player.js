@@ -346,7 +346,7 @@ export default class Player extends Component {
         const {data} = this.state;
         const {w, h} = this.state.size;
         const turn = data.get('turn');
-        const [score1, score2] = data.get('scores');
+        const [score0, score1] = data.get('scores');
         return (
             <div className="container mt-4">
                 <div className="row">
@@ -354,9 +354,14 @@ export default class Player extends Component {
                         turn: {turn}
                     </div>
                     <div className="col">
-                        <span className="text-primary">{score1}</span>
-                        {' - '}
-                        <span className="text-danger">{score2}</span>
+                        <div className="row">
+                            <span className="col-6 text-center">{window.team0name}</span>
+                            <span className="col-6 text-center">{window.team1name}</span>
+                        </div>
+                        <div className="row">
+                            <span className="col-6 text-center text-primary">{score0}</span>
+                            <span className="col-6 text-center text-danger">{score1}</span>
+                        </div>
                     </div>
                     <div className="col text-center">
                         <div className="btn-group">
