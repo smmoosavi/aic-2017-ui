@@ -273,10 +273,10 @@ export default class Player extends Component {
         const directionX = [0, w - 1, 0, 1];
         const [id, m] = diff;
         if (m === 0) {// turn right
-            map.updateIn(['bees', id, 'direction'], d => (d + 1) % 4);
+            map.updateIn(['bees', id, 'direction'], d => (d + 3) % 4);
         }
         if (m === 2) {// turn left
-            map.updateIn(['bees', id, 'direction'], d => (d + 3) % 4);
+            map.updateIn(['bees', id, 'direction'], d => (d + 1) % 4);
         }
         if (m === 1) {// move
             const d = map.getIn(['bees', id, 'direction']);
