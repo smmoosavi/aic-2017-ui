@@ -269,8 +269,8 @@ export default class Player extends Component {
     };
     applyMove = (map, diff) => {
         const [w, h] = map.get('size');
-        const directionY = [1, 0, w - 1, 0];
-        const directionX = [0, h - 1, 0, 1];
+        const directionY = [1, 0, h - 1, 0];
+        const directionX = [0, w - 1, 0, 1];
         const [id, m] = diff;
         if (m === 0) {// turn right
             map.updateIn(['bees', id, 'direction'], d => (d + 1) % 4);
