@@ -6,8 +6,8 @@ class Floor extends Component {
     render() {
         const {x, y}= this.props;
         const style = {
-            left: 64 * x,
-            top: 64 * y,
+            left: 64 * y,
+            top: 64 * x,
 
         };
         return <div className="floor" style={style}></div>
