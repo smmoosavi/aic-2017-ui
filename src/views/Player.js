@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import Immutable from 'immutable';
 import cx from 'classnames';
 
+const WIDTH = 48;
+
 class Floor extends Component {
     render() {
         const {x, y}= this.props;
         const style = {
-            left: 64 * y,
-            top: 64 * x,
+            left: WIDTH * y,
+            top: WIDTH * x,
 
         };
         return <div className="floor" style={style}></div>
@@ -19,8 +21,8 @@ class Bug extends Component {
         const {data}= this.props;
         const {x, y, direction, color, queen, sick, team} = data.toJS();
         const style = {
-            left: 64 * y,
-            top: 64 * x,
+            left: WIDTH * y,
+            top: WIDTH * x,
 
         };
         const dir = ['to-right', 'to-up', 'to-left', 'to-down'][direction];
@@ -35,8 +37,8 @@ class Food extends Component {
         const {data}= this.props;
         const {x, y} = data.toJS();
         const style = {
-            left: 64 * y,
-            top: 64 * x,
+            left: WIDTH * y,
+            top: WIDTH * x,
 
         };
         return <div className="food" style={style}></div>;
@@ -48,8 +50,8 @@ class Trash extends Component {
         const {data}= this.props;
         const {x, y} = data.toJS();
         const style = {
-            left: 64 * y,
-            top: 64 * x,
+            left: WIDTH * y,
+            top: WIDTH * x,
 
         };
         return <div className="trash" style={style}></div>;
@@ -64,8 +66,8 @@ class Net extends Component {
         const _x = (w + x + dx) % w;
         const _y = (h + y + dy) % h;
         const style = {
-            left: 64 * _y,
-            top: 64 * _x,
+            left: WIDTH * _y,
+            top: WIDTH * _x,
 
         };
         return <div className="net" style={style}></div>;
@@ -78,8 +80,8 @@ class Teleport extends Component {
         const {data}= this.props;
         const {x, y} = data.toJS();
         const style = {
-            left: 64 * y,
-            top: 64 * x,
+            left: WIDTH * y,
+            top: WIDTH * x,
 
         };
         return <div className="teleport" style={style}></div>;
@@ -137,8 +139,8 @@ class Board extends Component {
         });
 
         const style = {
-            width: 64 * w,
-            height: 64 * h,
+            width: WIDTH * w,
+            height: WIDTH * h,
         };
         return <div className="board" style={style}>
             {children}

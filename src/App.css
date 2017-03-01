@@ -1,8 +1,9 @@
 .floor {
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     background-image: url(images/0/floor.png);
+    background-size: contain;
 }
 
 .board {
@@ -11,102 +12,122 @@
 
 .bug {
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     transition: top 200ms, left 200ms, transform 200ms;
 }
 
 .bug.up.team0 {
     background-image: url(images/0/0.png);
+    background-size: contain;
 }
 
 .bug.up.team1 {
     background-image: url(images/0/1.png);
+    background-size: contain;
 }
 
 .bug.up.queen.team0 {
     background-image: url(images/0/2.png);
+    background-size: contain;
 }
 
 .bug.up.queen.team1 {
     background-image: url(images/0/3.png);
+    background-size: contain;
 }
 
 .bug.down.team0 {
     background-image: url(images/0/4.png);
+    background-size: contain;
 }
 
 .bug.down.team1 {
     background-image: url(images/0/5.png);
+    background-size: contain;
 }
 
 .bug.down.queen.team0 {
     background-image: url(images/0/6.png);
+    background-size: contain;
 }
 
 .bug.down.queen.team1 {
     background-image: url(images/0/7.png);
+    background-size: contain;
 }
 
 .bug.sick.up.team0 {
     background-image: url(images/0/8.png);
+    background-size: contain;
 }
 
 .bug.sick.up.team1 {
     background-image: url(images/0/9.png);
+    background-size: contain;
 }
 
 .bug.sick.up.queen.team0 {
     background-image: url(images/0/10.png);
+    background-size: contain;
 }
 
 .bug.sick.up.queen.team1 {
     background-image: url(images/0/11.png);
+    background-size: contain;
 }
 
 .bug.sick.down.team0 {
     background-image: url(images/0/12.png);
+    background-size: contain;
 }
 
 .bug.sick.down.team1 {
     background-image: url(images/0/13.png);
+    background-size: contain;
 }
 
 .bug.sick.down.queen.team0 {
     background-image: url(images/0/14.png);
+    background-size: contain;
 }
 
 .bug.sick.down.queen.team1 {
     background-image: url(images/0/15.png);
+    background-size: contain;
 }
 
 .food {
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     background-image: url(images/0/food0.png);
+    background-size: contain;
 }
 
 .trash {
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     background-image: url(images/0/trash0.png);
+    background-size: contain;
 }
 
 .net {
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     background-image: url(images/0/slipper.png);
+    background-size: contain;
     opacity: 0.4;
 }
 
 .teleport {
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     background-image: url(images/0/teleport_in.png);
+    background-size: contain;
 }
 
 .to-up {
