@@ -147,6 +147,26 @@ class Board extends Component {
     }
 }
 
+class Counts extends Component {
+    render() {
+        const {data} =this.props;
+        const [w, h] = data.get('size');
+        const total = w * h;
+        const bs = data.get('bees').count(bee => bee.get('team') === 0 && bee.get('queen') === 0);
+        const bq = data.get('bees').count(bee => bee.get('team') === 0 && bee.get('queen') === 1);
+        const rs = data.get('bees').count(bee => bee.get('team') === 1 && bee.get('queen') === 0);
+        const rq = data.get('bees').count(bee => bee.get('team') === 1 && bee.get('queen') === 1);
+        return <div className="counts">
+            <div style={{width: (100 * bq / total) + '%'}} className="blue-queen-count"></div>
+            <div style={{width: (100 * bs / total) + '%'}} className="blue-solder-count"></div>
+            <div className="counts-divider"></div>
+            <div style={{width: (100 * rs / total) + '%'}} className="red-solder-count"></div>
+            <div style={{width: (100 * rq / total) + '%'}} className="red-queen-count"></div>
+        </div>;
+    }
+}
+
+
 const convertBee = ([id, x, y, direction, color, queen, sick, team]) => {
     return Immutable.Map({id, x, y, direction, color, queen, sick, team});
 };
@@ -361,6 +381,11 @@ export default class Player extends Component {
                         <div className="row">
                             <span className="col-6 text-center text-primary">{score0}</span>
                             <span className="col-6 text-center text-danger">{score1}</span>
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <Counts data={data}/>
+                            </div>
                         </div>
                     </div>
                     <div className="col text-center">

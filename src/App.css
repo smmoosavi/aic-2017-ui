@@ -124,3 +124,39 @@
 .to-left {
     transform: rotate(270deg);
 }
+
+.counts {
+    position: relative;
+    height: 8px;
+    display: flex;
+    align-items: stretch;
+}
+
+.blue-solder-count {
+    height: 100%;
+    background-color: #5c6bc0;
+    flex: 0 0 auto;
+}
+
+.blue-queen-count {
+    height: 100%;
+    background-color: #283593;
+    flex: 0 0 auto;
+}
+
+.counts-divider {
+    background-color: #eeeeee;
+    flex: 1 0 auto;
+}
+
+.red-solder-count {
+    height: 100%;
+    background-color: #ef5350;
+    flex: 0 0 auto;
+}
+
+.red-queen-count {
+    height: 100%;
+    background-color: #c62828;
+    flex: 0 0 auto;
+}
