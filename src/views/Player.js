@@ -398,7 +398,7 @@ export default class Player extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row justify-content-center mt-4">
+                <div className="row justify-content-center mt-4 mb-4">
                     <div className="col d-flex justify-content-center">
                         <Board w={w} h={h} data={data}/>
                     </div>
