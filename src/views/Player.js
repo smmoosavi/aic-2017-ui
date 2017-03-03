@@ -16,10 +16,24 @@ class Floor extends Component {
     }
 }
 
+class Power extends Component {
+    render() {
+        let {power, maxPower} = this.props;
+        if (power > maxPower) {
+            power = maxPower;
+        }
+        const p = 250 - 125 * (power / maxPower);
+        return <svg className="power" viewBox="0 0 100 100">
+            <circle className="arc arc1" r="40" cy="50" cx="50" fill="none" strokeDashoffset={p}/>
+            <circle className="arc arc2" r="40" cy="50" cx="50" fill="none" strokeDashoffset={p}/>
+        </svg>
+    }
+}
+
 class Bug extends Component {
     render() {
         const {data}= this.props;
-        const {x, y, direction, color, queen, sick, team} = data.toJS();
+        const {x, y, direction, color, queen, sick, team, power} = data.toJS();
         const style = {
             left: WIDTH * y,
             top: WIDTH * x,
@@ -28,7 +42,7 @@ class Bug extends Component {
         const dir = ['to-right', 'to-up', 'to-left', 'to-down'][direction];
 
         const className = cx("bug", color ? 'up' : 'down', 'team' + team, {sick, queen}, dir);
-        return <div className={className} style={style}></div>;
+        return <div className={className} style={style} title={power}><Power power={power} maxPower={100}/></div>;
     }
 }
 
@@ -144,7 +158,6 @@ class Board extends Component {
         };
         return <div className="board" style={style}>
             {children}
-            <h1 className="to-right">E</h1>
         </div>
     }
 }
@@ -170,7 +183,7 @@ class Counts extends Component {
 
 
 const convertBee = ([id, x, y, direction, color, queen, sick, team]) => {
-    return Immutable.Map({id, x, y, direction, color, queen, sick, team});
+    return Immutable.Map({id, x, y, direction, color, queen, sick, team, power: 0});
 };
 const convertFood = ([id, x, y]) => {
     return Immutable.Map({id, x, y});
@@ -270,7 +283,7 @@ export default class Player extends Component {
         const [id, type, x, y, direction, color, queen, team] = diff;
         if (type === 0) {
             const sick = 0;
-            const bee = Immutable.Map({id, x, y, direction, color, queen, sick, team});
+            const bee = Immutable.Map({id, x, y, direction, color, queen, sick, team, power: 0});
             map.setIn(['bees', id], bee);
         }
         if (type === 1) {
@@ -304,6 +317,7 @@ export default class Player extends Component {
             const d = map.getIn(['bees', id, 'direction']);
             map.updateIn(['bees', id, 'x'], x => (x + directionX[d]) % w);
             map.updateIn(['bees', id, 'y'], y => (y + directionY[d]) % h);
+            map.updateIn(['bees', id, 'power'], p => p + 1);
         }
     };
     applyChanges = (map, diff) => {

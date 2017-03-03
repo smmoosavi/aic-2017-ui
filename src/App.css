@@ -17,6 +17,36 @@
     transition: top 200ms, left 200ms, transform 200ms;
 }
 
+.bug .power {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 0;
+    left: 0;
+}
+
+.bug.team0 .power .arc {
+    stroke: #5c6bc0;
+}
+
+.bug.team1 .power .arc {
+    stroke: #ef5350;
+}
+
+.power .arc {
+    stroke-dasharray: 251 251; /* Math.PI * 2 * R */
+    transform-origin: 50% 50%;
+    stroke-width: 6px;
+}
+
+.power .arc1 {
+    transform: rotate(90deg);
+}
+
+.power .arc2 {
+    transform: rotate(90deg) scaleY(-1);
+}
+
 .bug.up.team0 {
     background-image: url(images/0/0.png);
     background-size: contain;
