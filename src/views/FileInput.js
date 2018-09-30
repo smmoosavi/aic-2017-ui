@@ -57,7 +57,7 @@ export default class FileInput extends Component {
                 <div className="row justify-content-md-center">
                     <div className="col col-md-6">
                         <div className="card mt-4">
-                            <div className="card-block">
+                            <div className="card-body">
                                 {this.state.error && <div className="alert alert-danger">Invalid file</div>}
                                 {showInput && <input type="file" onChange={this.onChange}/>}
                                 {!showInput && <div className="text-center">loading</div>}

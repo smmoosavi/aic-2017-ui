@@ -6,7 +6,7 @@ export default class FileInput extends Component {
             <div className="row justify-content-md-center">
                 <div className="col col-md-6">
                     <div className="card mt-4">
-                        <div className="card-block text-center">
+                        <div className="card-body text-center">
                             loading ...
                         </div>
                     </div>
